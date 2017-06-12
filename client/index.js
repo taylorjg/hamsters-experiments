@@ -7,9 +7,8 @@ const max = (a, b) => Math.max(a, b);
 const reduceMax = xs => xs.reduce(max, 0);
 
 const doIt = maxThreads => {
-    const timerName = `timer-${maxThreads}`;
-    return new Promise((resolve, reject) => {
-        const start = Date.now()
+    return new Promise(resolve => {
+        const start = Date.now();
         const params = {
             ['array']: range(0, ARRAY_LENGTH)
         };
@@ -19,10 +18,11 @@ const doIt = maxThreads => {
                 const max = (a, b) => Math.max(a, b);
                 const reduceMax = xs => xs.reduce(max, 0);
                 const arr = params['array'];
-                let dummy = 0;
+                // let dummy = 0;
                 for (let i = 0; i < arr.length * 10000; i++) {
-                    dummy = i + 1;
+                    // dummy = i + 1;
                 }
+                // eslint-disable-next-line no-undef
                 rtn.data.push(reduceMax(arr));
             },
             function f2() {
