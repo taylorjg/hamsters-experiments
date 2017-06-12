@@ -17,13 +17,10 @@ const doIt = maxThreads => {
             function f1() {
                 const max = (a, b) => Math.max(a, b);
                 const reduceMax = xs => xs.reduce(max, 0);
+                const busyWait = iterations => { for (let i = 0; i < iterations * 10000; i++); };
                 const arr = params['array'];
-                // let dummy = 0;
-                for (let i = 0; i < arr.length * 10000; i++) {
-                    // dummy = i + 1;
-                }
-                // eslint-disable-next-line no-undef
-                rtn.data.push(reduceMax(arr));
+                busyWait(arr.length);
+                rtn.data.push(reduceMax(arr)); // eslint-disable-line no-undef
             },
             function f2() {
                 const result = reduceMax(arguments[0]);
