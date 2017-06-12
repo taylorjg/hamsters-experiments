@@ -37,6 +37,7 @@ const doIt = maxThreads => {
     });
 };
 
+const maxThreads = document.getElementById('maxThreads');
 const verbose = document.getElementById('verbose');
 const init = document.getElementById('init');
 const run = document.getElementById('run');
@@ -60,11 +61,12 @@ init.addEventListener('click', e => {
     e.preventDefault();
 
     hamsters.init({
-        maxThreads: 8,
+        maxThreads: Number(maxThreads.value),
         debug: verbose.checked ? 'verbose' : false
     });
 
     // 'hamsters.init' can only be called once.
+    maxThreads.disabled = true;
     verbose.disabled = true;
     init.disabled = true;
 
