@@ -2,7 +2,7 @@ import hamsters from 'hamsters.js';
 
 const ARRAY_LENGTH = 1024 * 1024;
 
-const range = (start, len) => Array.from(Array(len).keys()).map(n => n + start);
+const range = n => Array.from(Array(n).keys());
 const max = (a, b) => Math.max(a, b);
 const reduceMax = xs => xs.reduce(max, 0);
 
@@ -10,7 +10,7 @@ const doIt = maxThreads => {
     return new Promise(resolve => {
         const start = Date.now();
         const params = {
-            ['array']: range(0, ARRAY_LENGTH)
+            ['array']: range(ARRAY_LENGTH)
         };
         hamsters.run(
             params,
