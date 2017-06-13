@@ -38,6 +38,7 @@ const maxThreads = document.getElementById('maxThreads');
 const verbose = document.getElementById('verbose');
 const init = document.getElementById('init');
 const run = document.getElementById('run');
+const spinner = document.getElementById('spinner');
 const outputArea = document.getElementById('outputArea');
 
 run.disabled = true;
@@ -70,15 +71,27 @@ init.addEventListener('click', e => {
     run.disabled = false;
 });
 
+const showSpinner = () => spinner.className = 'show';
+const hideSpinner = () => spinner.className = 'hide';
+
+const start = () => {
+    log('Starting');
+    showSpinner();
+    run.disabled = true;
+    return Promise.resolve();
+};
+
+const finish = () => {
+    log('Finished\n');
+    hideSpinner();
+    run.disabled = false;
+};
+
 run.addEventListener('click', e => {
-
     e.preventDefault();
-
-    log('Starting')
-        .then(() => run.disabled = true)
+    start()
         .then(() => doIt(2))
         .then(() => doIt(4))
         .then(() => doIt(8))
-        .then(() => log('Finished\n'))
-        .then(() => run.disabled = false);
+        .then(finish);
 });
